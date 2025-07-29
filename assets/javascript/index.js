@@ -121,30 +121,3 @@ cards.forEach((card) => {
 })
 
 
-
-
-
-
-
-
-
-document.getElementById("form-contact").addEventListener("submit", function(e) {
-      e.preventDefault(); // Prevent form from refreshing page
-
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
-      alert(data)
-      fetch("https://hooks.zapier.com/hooks/catch/23948894/uuj3w3c/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Message sent!");
-        } else {
-          alert("Failed to send. Try again.");
-        }
-      });
-    });
