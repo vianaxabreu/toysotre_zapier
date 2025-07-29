@@ -43,4 +43,38 @@ permalink: /contact/
   </div>
 </div>
 
+<script>
+document.getElementById("form-contact").addEventListener("submit", function(e) {
+  e.preventDefault(); // Stop the form from submitting the normal way
+
+  const form = e.target;
+  const data = {
+    full_name: form.full_name.value,
+    email: form.email.value,
+    order_number: form.order_number.value,
+    message: form.message.value
+  };
+
+  fetch("https://hooks.zapier.com/hooks/catch/123456/abcde", { // replace with your actual URL
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    if (res.ok) {
+      alert("✅ Message sent successfully!");
+      form.reset();
+    } else {
+      alert("❌ Error sending message. Please try again.");
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("❌ Network error. Please try again.");
+  });
+});
+</script>
+
 
